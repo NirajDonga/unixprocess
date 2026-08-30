@@ -1,0 +1,8 @@
+# Ignore generated executables and build outputs
+*
+
+# Keep source and repo files tracked
+!*.c
+!*.h
+!Makefile
+!.gitignore
