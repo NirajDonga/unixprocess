@@ -3,6 +3,7 @@
 #include<unistd.h>
 
 int main(int argc, char* argv[]) {
+    // exec function replace whole process. so program dont continue.
 
     char *args[] = {"ping", "google.com", NULL};
     char *args2[] = {"ping", "google.com", NULL};
