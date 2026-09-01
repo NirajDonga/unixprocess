@@ -12,13 +12,28 @@ int main(int argc, char* argv[]) {
 
     if(pid == 0) {
         // child process gets replaced by ping.
-        execlp("ping", "ping", "-c", "3", "google.com", NULL);
-        
-        // this should not be printed.
+        int err = execlp("ping", "ping", "-c", "3", "google.con", NULL);
+        if(err == -1) {
+            printf("could not find program to execute \n");
+            return 2;   
+        }
+
+        // this should not be printed in successfull run.
         printf("success\n");
     }
     else {
-        wait(NULL);
+        int wtstatus;
+        wait(&wtstatus);
+        if(WIFEXITED(wtstatus)) {
+            int statuscode = WEXITSTATUS(wtstatus);
+            if(statuscode == 0) {
+                printf("Success \n");
+            }
+            else {
+                printf("Failure \n");
+            }
+        }
+
         printf("post processing \n");
     }
 
